@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Loja de Patos</title>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo à Loja: <h1>
+            QUACKTÁSTICA PATODAVIDA</h1>
+            <p>Aqui, a alegria vem em forma de penas!</p>
+    </header>
+    <main>
+       
+        <div class="store-info">
+            <div class="left-column">
+                <h2>Conheça a nossa loja</h2>
+                <p>Oferecemos uma grande variedade de espécies de patos para variar as formas de felicidade que cada um nos transmite com sua companhia, além de poderem fazer amizades com outros animais, como o Cãozinho e o Gatito &hearts;. Nossos patos são saudáveis, felizes e prontos para encontrar um novo lar. Confira nossa seleção incrível! Nossa venda é legalizada pelo IBAMA</p>
+            </div>
+            <!-- Espaço para a imagem representativa -->
+            <div class="right-column">
+                <img src="Pato e doguinho.png" alt="Patos à venda">
+            </div>
+       
+        </div>
+        <!-- Produtos na loja -->
+        <div class="content">
+            <input type="text" id="search-bar" placeholder="Digite aqui para filtrar...">
+        </div>
+        <div class="products" id="product-list">
+            <div class="product">
+                <h3>Pato Amarelo</h3>
+                <p>Informações: Pato amarelo fofinho.</p>
+                <p>R$ 29.99</p>
+                <button class="buy-btn" onclick="redirectToCheckout('Pato Amarelo', 'Pato amarelo fofinho.', 'R$ 29.99')">Comprar</button>
+            </div>
+            <div class="product">
+                <h3>Pato Branco</h3>
+                <p>Informações: Pato branco adorável.</p>
+                <p>R$ 24.99</p>
+                <button class="buy-btn" onclick="redirectToCheckout('Pato Branco', 'Pato branco adorável.', 'R$ 24.99')">Comprar</button>
+            </div>
+            <!-- Adicione mais produtos conforme necessário -->
+        </div>
+    </main>
+    <footer>
+        <div class="seal">
+            <img src="ibamma.png" alt="Selo da Empresa">
+        </div>
+    </footer>
+
+    <script>
+        function redirectToCheckout(productName, productInfo, productPrice) {
+            // Redirecionar para a página de detalhes do produto com os parâmetros do produto
+            window.location.href = `dp.html?produto=${encodeURIComponent(productName)}&info=${encodeURIComponent(productInfo)}&preco=${encodeURIComponent(productPrice)}`;
+        }
+        // Função para filtrar os produtos com base no texto da caixa de entrada
+function filterProducts() {
+    var input, filter, product, productName, i;
+    input = document.getElementById("search-bar");
+    filter = input.value.toUpperCase();
+    product = document.getElementById("product-list").getElementsByClassName("product");
+
+    for (i = 0; i < product.length; i++) {
+        productName = product[i].getElementsByTagName("h3")[0].textContent;
+        if (productName.toUpperCase().indexOf(filter) > -1) {
+            product[i].style.display = "";
+        } else {
+            product[i].style.display = "none";
+        }
+    }
+}
+
+// Adicione um ouvinte de eventos para chamar a função de filtro quando o usuário digitar na barra de pesquisa
+document.getElementById("search-bar").addEventListener("input", filterProducts);
+
+    </script>
+</body>
+</html>

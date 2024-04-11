@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Detalhes do Produto</title>
+</head>
+<body>
+    <header>
+        <h1>Detalhes do Produto</h1>
+    </header>
+    <main>
+        <div class="product-info">
+            <div class="left-column">
+                <!-- Espaço para a imagem do produto -->
+                <img id="product-image" src="" alt="Produto à venda">
+            </div>
+            <div class="right-column">
+                <h2 id="product-name">Nome do Produto</h2>
+                <p id="product-info">Informações sobre o produto.</p>
+                <p id="product-price">Preço: R$ X.XX</p>
+                <a class="buy-btn" href="pgcmpr.html" onclick="redirectToCheckout()">Comprar</a></p>
+            </div>
+        </div>
+        <a href="loja.html" class="btn">Voltar para a Loja</a>
+    </main>
+    <script>
+        function redirectToCheckout() {
+            // Extrair os parâmetros da URL
+            var productName = getUrlParameter('produto');
+            var productInfo = getUrlParameter('info');
+            var productPrice = getUrlParameter('preco');
+    
+            // Redirecionar para a página de finalização da compra com os parâmetros do produto
+            window.location.href = `checkout.html?produto=${encodeURIComponent(productName)}&info=${encodeURIComponent(productInfo)}&preco=${encodeURIComponent(productPrice)}`;
+        }
+        // Função para obter parâmetros da URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(window.location.search);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+    
+        // Extrair e exibir os parâmetros da URL
+        var productName = getUrlParameter('produto');
+        var productInfo = getUrlParameter('info');
+        var productPrice = getUrlParameter('preco');
+        var productImage = getUrlParameter('imagem');
+    
+        // Atualizar elementos HTML com os detalhes do produto
+        document.getElementById("product-name").textContent = productName;
+        document.getElementById("product-info").textContent = `Informações: ${productInfo}`;
+        document.getElementById("product-price").textContent = `Preço: ${productPrice}`;
+        document.getElementById("product-image").src = productImage;
+    </script>    
+</body>
